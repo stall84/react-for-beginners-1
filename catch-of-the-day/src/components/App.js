@@ -10,8 +10,8 @@ class App extends React.Component {
                 <div className="menu">
                     <Header mainLine="Fresh Seafood Market" secondLine="Doing Fishy Work" age={36} />
                 </div>
-                  {/* <Order />
-                  <Inventory /> */}
+                  <Order />
+                  <Inventory />
                
             </div>
         )
