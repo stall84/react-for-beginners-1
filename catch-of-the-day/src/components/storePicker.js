@@ -21,10 +21,10 @@ class StorePicker extends React.Component {
         // Stop form from refreshing/'submitting'
         event.preventDefault();
         // Get the text from user in input form (via ref)
-        console.log(this.myInput.current.value);
-
-        
-    }
+        const storeName = this.myInput.current.value
+        // redirect to user-input store name using router /store/(user-form-input)
+        this.props.history.push(`/store/${storeName}`)
+     }
 
     render() {
        
