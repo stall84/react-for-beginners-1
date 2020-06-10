@@ -2,6 +2,8 @@ import React from 'react';
 import Header from './Header';
 import Order from './Order';
 import Inventory from './Inventory';
+import sampleFishes from '../sample-fishes';
+import Fish from './Fish';
 
 class App extends React.Component {
     // Setting up our State for whole app, all components. Starting with initial-state
@@ -15,7 +17,7 @@ class App extends React.Component {
     // You can't add items from creating/pulling component (in this case the AddFishForm), you have to add items in from 
     // the same location state is created.. so that's here in App
     // We will need to run this addFish method from AddFishForm. The way you get this method that's in/on App.js
-    // down two levels deep on AddFishForm.js is by passing it in props down to the child component. Remember AddFishForm lives inside Inventory, so pass it to 
+    // down two levels deep on AddFishForm.js is by passing it in props down (drilling) to the child component. Remember AddFishForm lives inside Inventory, so pass it to 
     // Inventory's props, then go into Inventory and pass it down one more level to AddFishForm
 
     addFish = (fish) => {     
@@ -32,14 +34,21 @@ class App extends React.Component {
     })
     }
 
+    loadSampleFishes = () => {
+        this.setState({ fishes: sampleFishes })
+    }
+
     render() {
         return (
             <div className="catch-of-the-day">
                 <div className="menu">
                     <Header mainLine="Fresh Seafood Market" secondLine="Doing Fishy Work" age={36} />
+                        <ul className="fishes">
+                            {Object.keys(this.state.fishes).map(fish => <p>{fish}</p>)}
+                        </ul>
                 </div>
                   <Order />
-                  <Inventory addFish={this.addFish} />
+                  <Inventory addFish={this.addFish} loadSampleFishes={this.loadSampleFishes} />
                
             </div>
         )
