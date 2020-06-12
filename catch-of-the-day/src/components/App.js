@@ -38,16 +38,27 @@ class App extends React.Component {
         this.setState({ fishes: sampleFishes })
     }
 
+    addToOrder = (fish) => {
+        // 1) Take another copy of state
+        const order = { ...this.state.order }
+        // 2) Either add to order or update the order
+        order[fish] = order.fish1 + 1 || 1;
+        // 3) Call set state to update the state order object
+        this.setState({ order });
+    }
     render() {
         return (
             <div className="catch-of-the-day">
                 <div className="menu">
                     <Header mainLine="Fresh Seafood Market" secondLine="Doing Fishy Work" age={36} />
                         <ul className="fishes">
-                            {Object.keys(this.state.fishes).map(fish => <p>{fish}</p>)}
+                            {Object.keys(this.state.fishes).map(fish => <Fish key={fish} index={fish} details={this.state.fishes[fish]} addToOrder={this.addToOrder} />)}
                         </ul>
                 </div>
-                  <Order />
+                {/* Using object spread of state to pass it into Order via props Although if you have a lot of items in state that you are not using
+                in the component you're passing down to, you should use specific (fishes={this.state.fishes} order={this.state.order} syntax
+                in this case though we're using both properties of our state in the order component */}
+                  <Order {...this.state} />
                   <Inventory addFish={this.addFish} loadSampleFishes={this.loadSampleFishes} />
                
             </div>
